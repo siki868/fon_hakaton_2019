@@ -3,31 +3,60 @@
 {% block content %}
     {% load static %}
     <div class="row container">
-        <ul class="collection">
-            <button onclick="location.href = 'mapa/';" class="collection-item white waves-effect" style="margin:0;width:100%;border-style:none;">
-                <span><img class="left" style="height:12%;" src="{% static 'main/pollen.png' %}"><h2>Koncentracija polena</h2></span>
-            </button>
-        </ul>
-        <ul class="collection">
-            <button class="collection-item white waves-effect" style="margin:0;width:100%;border-style:none;">
-                <span><img class="left" style="height:12%;" src="{% static 'main/factory.png' %}"><h2>Zagadjenost vazduha</h2></span>
-            </button>
-        </ul>
-        <ul class="collection">
-            <button class="collection-item white waves-effect" style="margin:0;width:100%;border-style:none;">
-                <span><img class="left" style="height:12%;" src="{% static 'main/factory.png' %}"><h2>Kvalitet vazduha</h2></span>
-            </button>
-        </ul>
-        <ul class="collection">
-            <button class="collection-item white waves-effect" style="margin:0;width:100%;border-style:none;">
-                <span><img class="left" style="height:12%;" src="{% static 'main/global.png' %}"><h2>Temperatura</h2></span>
-            </button>
-        </ul>
-        <ul class="collection">
-            <button class="collection-item white waves-effect" style="margin:0;width:100%;border-style:none;">
-                <span><img class="left" style="height:12%;" src="{% static 'main/drop.png' %}"><h2>Padavine</h2></span>
-            </button>
-        </ul>
+        <div class="col m12 s12 l3 xl3">
+            <div class="card">
+                <div class="card-image">
+                    {% if icon == "01d" %}
+                        <img src="{% static 'main/01d.png' %}">
+                    {% elif icon == "01n" %}
+                        <img src="{% static 'main/01n.png' %}">
+                    {% elif icon == "02d" %}
+                        <img src="{% static 'main/02d.png' %}">
+                    {% elif icon == "02n" %}
+                        <img src="{% static 'main/02n.png' %}">
+                    {% elif icon == "03d" %}
+                        <img src="{% static 'main/03d.png' %}">
+                    {% elif icon == "04d" %}
+                        <img src="{% static 'main/04d.png' %}">
+                    {% elif icon == "09d" %}
+                        <img src="{% static 'main/09d.png' %}">
+                    {% else %}
+                        <img src="{% static 'main/01d.png' %}">
+                    {% endif %}
+                    <span style="color:black;" class="card-title"><b>{{location}}  {{temperature}}°C</b></span>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li><b>Indeks zagadjenosti:</b> {{aqius}}</li>
+                        <li><b>Vazdusni pritisak:</b> {{pressure}}hPa</li>
+                        <li><b>Vlaznost vazduha:</b> {{humidity}}%</li>
+                        <li><b>Brzina vetra:</b> {{wind_speed}}m/s</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col m12 s12 l9 xl9">
+            <ul class="collection">
+                <button onclick="location.href = 'mapa/';" class="collection-item white waves-effect" style="margin:0;width:100%;border-style:none;">
+                    <span><img class="left" style="height:12%;" src="{% static 'main/pollen.png' %}"><h2>Koncentracija polena</h2></span>
+                </button>
+            </ul>
+            <ul class="collection">
+                <button class="collection-item white waves-effect" style="margin:0;width:100%;border-style:none;">
+                    <span><img class="left" style="height:12%;" src="{% static 'main/factory.png' %}"><h2>Zagadjenost vazduha</h2></span>
+                </button>
+            </ul>
+            <ul class="collection">
+                <button class="collection-item white waves-effect" style="margin:0;width:100%;border-style:none;">
+                    <span><img class="left" style="height:12%;" src="{% static 'main/global.png' %}"><h2>Temperatura</h2></span>
+                </button>
+            </ul>
+            <ul class="collection">
+                <button class="collection-item white waves-effect" style="margin:0;width:100%;border-style:none;">
+                    <span><img class="left" style="height:12%;" src="{% static 'main/drop.png' %}"><h2>Padavine</h2></span>
+                </button>
+            </ul>
+        </div>
     </div>
     <style>
     </style>
