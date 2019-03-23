@@ -2,10 +2,33 @@
 
 {% block content %}
     {% load static %}
-    <div class="section">
-        <div class="row container">
-            <h2 class="header">NKB</h2>
-            <p class="grey-text text-darken-3 lighten-3">Dobrodosli</p>
-        </div>
+    <div class="row container">
+        <ul class="collection">
+            <button onclick="location.href = 'mapa/';" class="collection-item white waves-effect" style="margin:0;width:100%;border-style:none;">
+                <span><img class="left" style="height:12%;" src="{% static 'main/pollen.png' %}"><h2>Koncentracija polena</h2></span>
+            </button>
+        </ul>
+        <ul class="collection">
+            <button class="collection-item white waves-effect" style="margin:0;width:100%;border-style:none;">
+                <span><img class="left" style="height:12%;" src="{% static 'main/factory.png' %}"><h2>Zagadjenost vazduha</h2></span>
+            </button>
+        </ul>
+        <ul class="collection">
+            <button class="collection-item white waves-effect" style="margin:0;width:100%;border-style:none;">
+                <span><img class="left" style="height:12%;" src="{% static 'main/factory.png' %}"><h2>Kvalitet vazduha</h2></span>
+            </button>
+        </ul>
+        <ul class="collection">
+            <button class="collection-item white waves-effect" style="margin:0;width:100%;border-style:none;">
+                <span><img class="left" style="height:12%;" src="{% static 'main/global.png' %}"><h2>Temperatura</h2></span>
+            </button>
+        </ul>
+        <ul class="collection">
+            <button class="collection-item white waves-effect" style="margin:0;width:100%;border-style:none;">
+                <span><img class="left" style="height:12%;" src="{% static 'main/drop.png' %}"><h2>Padavine</h2></span>
+            </button>
+        </ul>
     </div>
+    <style>
+    </style>
 {% endblock %}

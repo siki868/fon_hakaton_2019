@@ -1,17 +1,31 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<ul id="main_menu" class="dropdown-content">
+  <li><a href="#!">one</a></li>
+  <li><a href="#!">two</a></li>
+  <li><a href="#!">three</a></li>
+</ul>
 <div class="navbar-fixed">
     <nav>
-        <div class="nav-wrapper grey darken-4">
-            <a href="#" class="brand-logo">NKB</a>
+        <div class="nav-wrapper blue">
+            <a href="{% url 'main:index' %}" class="brand-logo">NKB</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="#">{{user.first_name}} {{user.last_name}}</a></li>
-                <li><a href="/logout">Izloguj se</a></li>
+                <li><a href="{% url 'main:mapa' %}">Koncentracija polena</a></li>
+                <li><a href="zagadjenost/">Zagadjenost vazduha</a></li>
+                <li><a href="temperatura/">Temperatura</a></li>
+                <li><a href="padavine/">Padavine</a></li>
             </ul>
         </div>
     </nav>
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="{% url 'main:mapa' %}">Koncentracija polena</a></li>
+        <li><a href="zagadjenost/">Zagadjenost vazduha</a></li>
+        <li><a href="temperatura/">Temperatura</a></li>
+        <li><a href="padavine/">Padavine</a></li>
+    </ul>
 </div>
-<style>
-    .navbar-fixed, nav, .nav-wrapper {
-        height: 48px;
-        line-height: 48px;
-    }
-</style>
+<script>
+    $(document).ready(function(){
+        $('.sidenav').sidenav();
+    });
+</script>
