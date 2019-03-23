@@ -6,22 +6,22 @@
 </ul>
 <div class="navbar-fixed">
     <nav>
-        <div class="nav-wrapper blue">
+        <div class="nav-wrapper green darken-1">
             <a href="{% url 'main:index' %}" class="brand-logo">NKB</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="{% url 'main:mapa' %}">Koncentracija polena</a></li>
                 <li><a href="zagadjenost/">Zagadjenost vazduha</a></li>
-                <li><a href="temperatura/">Temperatura</a></li>
-                <li><a href="padavine/">Padavine</a></li>
+                <li><a href="meteoalarm/">Meteo alarm</a></li>
+                <li><a href="/logout">Izloguj se</a></li>
             </ul>
         </div>
     </nav>
     <ul class="sidenav" id="mobile-demo">
         <li><a href="{% url 'main:mapa' %}">Koncentracija polena</a></li>
         <li><a href="zagadjenost/">Zagadjenost vazduha</a></li>
-        <li><a href="temperatura/">Temperatura</a></li>
-        <li><a href="padavine/">Padavine</a></li>
+        <li><a href="meteoalarm/">Meteo alarm</a></li>
+        <li><a href="/logout">Izloguj se</a></li>
     </ul>
 </div>
 <script>
