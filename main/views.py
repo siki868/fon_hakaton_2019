@@ -56,7 +56,9 @@ def polen(request):
         pollen = temp*w[0] + wind*w[1] + hum*w[2] + bias
         loc.append(pollen)
     context = {
-        "locations":locations
+        "locations":locations,
+        "w":w,
+        "bias":bias,
     }
     return render(request, 'polen.html', context)
 
