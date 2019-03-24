@@ -42,14 +42,23 @@ def mapa(request):
     w = [0.1929837875, 0.12066294, 0.024074145]
     bias = 0.4859178125
     data = yw.YahooWeather(APP_ID=app_id, apikey=client_id, apisecret=client_secret)
-    data.get_yahoo_weather_by_city('Belgrade', Unit.celsius)
-    temp    = float(data.condition.temperature)
-    hum  = float(data.atmosphere.humidity)/100
-    wind   = float(data.wind.speed)
+    locations = [[44.93019519, 20.51549239], [44.90669986, 20.39153628], [44.8070656, 20.39225383],
+    [44.68198256, 20.50764152], [44.69895266, 20.40278736], [44.85624252, 20.45025023],
+    [44.90019666, 20.37783463], [44.74309937, 20.34613769], [44.90692789, 20.45439552],
+    [44.72954115, 20.35203527], [44.76904078, 20.48497651], [44.91913832, 20.53454544],
+    [44.88659679, 20.3694222], [44.75154831, 20.55532326], [44.86148748, 20.41298026], 
+    [44.8857341, 20.45377346]]
+    pollens = []
+    for loc in locations:
+        data.get_yahoo_weather_by_location(loc[0], loc[1], Unit.celsius)
+        temp    = float(data.condition.temperature)
+        hum  = float(data.atmosphere.humidity)/100
+        wind   = float(data.wind.speed)
 
-    pollen = temp*w[0] + wind*w[1] + hum*w[2] + bias
+        pollen = temp*w[0] + wind*w[1] + hum*w[2] + bias
+        loc.append(pollen)
     context = {
-        "pollen":pollen
+        "locations":locations
     }
     return render(request, 'mapa.html', context)
 
