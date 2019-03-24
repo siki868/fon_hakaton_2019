@@ -6,6 +6,47 @@
     <script>
       let map;
       function initMap() {
+        var gradient = [
+          'rgba(0, 255, 255, 0)',
+          'rgba(0, 255, 255, 1)',
+          'rgba(0, 191, 255, 1)',
+          'rgba(0, 127, 255, 1)',
+          'rgba(0, 63, 255, 1)',
+          'rgba(0, 0, 255, 1)',
+          'rgba(0, 0, 223, 1)',
+          'rgba(0, 0, 191, 1)',
+          'rgba(0, 0, 159, 1)',
+          'rgba(0, 0, 127, 1)',
+          'rgba(63, 0, 91, 1)',
+          'rgba(127, 0, 63, 1)',
+          'rgba(191, 0, 31, 1)',
+          'rgba(255, 0, 0, 1)'
+        ]
+        let heatMapData = [
+            {location: new google.maps.LatLng(44.93019519, 20.51549239), weight: 13},
+            new google.maps.LatLng(44.93019519, 20.51549239),
+            {location: new google.maps.LatLng(44.90669986, 20.39153628), weight: 7},
+            {location: new google.maps.LatLng(44.8070656, 20.39225383), weight: 8},
+            {location: new google.maps.LatLng(44.68198256, 20.50764152), weight: 2},
+            new google.maps.LatLng(44.68198256, 20.50764152),
+            {location: new google.maps.LatLng(44.69895266, 20.40278736), weight: 4},
+
+            {location: new google.maps.LatLng(44.85624252, 20.45025023), weight: 11},
+            {location: new google.maps.LatLng(44.90019666, 20.37783463), weight: 6},
+            new google.maps.LatLng(44.90019666, 20.37783463),
+            {location: new google.maps.LatLng(44.74309937, 20.34613769), weight: 3},
+            new google.maps.LatLng(44.74309937, 20.34613769),
+            {location: new google.maps.LatLng(44.90692789, 20.45439552), weight: 2},
+            {location: new google.maps.LatLng(44.72954115, 20.35203527), weight: 3},
+            {location: new google.maps.LatLng(44.76904078, 20.48497651), weight: 13},
+            {location: new google.maps.LatLng(44.91913832, 20.53454544), weight: 5},
+            new google.maps.LatLng(44.91913832, 20.53454544),
+            {location: new google.maps.LatLng(44.88659679, 20.3694222), weight: 4},
+            {location: new google.maps.LatLng(44.75154831, 20.55532326), weight: 6},
+            {location: new google.maps.LatLng(44.86148748, 20.41298026), weight: 7},
+            {location: new google.maps.LatLng(44.8857341, 20.45377346), weight: 3}
+
+        ];
         let belgrade = {lat: 44.8, lng: 20.45};
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 0, lng: 0},
@@ -31,6 +72,13 @@
           // Browser doesn't support Geolocation
           handleLocationError(false, infoWindow, map.getCenter());
         }
+
+        var heatmap = new google.maps.visualization.HeatmapLayer({
+        data: heatMapData
+        });
+        heatmap.setMap(map);
+        heatmap.set('gradient', gradient);
+        heatmap.set('radius', 50);
       }
 
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -41,7 +89,7 @@
         infoWindow.open(map);
       }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAs1OfMvKwvEoo-NJ2hvls3yaL04dLDXRo&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAs1OfMvKwvEoo-NJ2hvls3yaL04dLDXRo&callback=initMap&libraries=visualization" async defer></script>
     <style>
         /* Always set the map height explicitly to define the size of the div
          * element that contains the map. */

@@ -32,7 +32,26 @@ def index(request):
     return render(request, 'index.html', context)
 
 def mapa(request):
-    return render(request, 'mapa.html')
+    import requests
+    import json
+    from yahoo_weather import yahoo_weather as yw
+    from yahoo_weather.config.units import Unit
+    app_id          = '8zRCxw38'
+    client_id       = 'dj0yJmk9QXM1Z1JXNGdIN2ZnJnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PWEz'
+    client_secret   = '9217a93b2c0e9245125cff2fcf98b1b327f82e3b'
+    w = [0.1929837875, 0.12066294, 0.024074145]
+    bias = 0.4859178125
+    data = yw.YahooWeather(APP_ID=app_id, apikey=client_id, apisecret=client_secret)
+    data.get_yahoo_weather_by_city('Belgrade', Unit.celsius)
+    temp    = float(data.condition.temperature)
+    hum  = float(data.atmosphere.humidity)/100
+    wind   = float(data.wind.speed)
+
+    pollen = temp*w[0] + wind*w[1] + hum*w[2] + bias
+    context = {
+        "pollen":pollen
+    }
+    return render(request, 'mapa.html', context)
 
 def logout_request(request):
     logout(request)
