@@ -62,6 +62,7 @@ class Updater(Thread):
             if self.paused:
                 time.sleep(1)
             else:
+                dict.clear()
                 self.get_weather()
                 
                 if current_code in codes.keys():
