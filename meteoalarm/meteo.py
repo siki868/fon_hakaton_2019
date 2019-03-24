@@ -7,9 +7,11 @@ import json
 
 units   = {'c': ['°C', 'km/h', 'mbar'], 'f': ['°F', 'm/h', 'inch Hg']}
 
-codes = {0:'Tornado', 1:'Oluja', 2:'Uragan', 3:'Jaka oluja sa grmljavinom', 4:'Oluja sa grmljavinom',
-         8:'Ledena kisa', 10:'Ledena kisa', 11:'Pljuskovi', 12:'Pljuskovi', 13:'Mecava', 15:'Mecava',
-         17:'Grad', 20:'Magla', 36:'Vrucina', 43:'Jak sneg', 32:'Suncano'}
+codes       = {0:'Tornado', 1:'Oluja', 2:'Uragan', 3:'Jaka oluja sa grmljavinom', 4:'Oluja sa grmljavinom',
+               8:'Ledena kisa', 10:'Ledena kisa', 11:'Pljuskovi', 12:'Pljuskovi', 13:'Mecava', 15:'Mecava',
+               17:'Grad', 20:'Magla', 36:'Vrucina', 43:'Jak sneg', 32:'Suncano'}
+
+code_levels = {0:5, 1:2, 2:5, 3:3, 4:3, 8:3, 10:3, 11:1, 12:1, 13:4, 15:4, 17:3, 20:3, 36:3, 43:3, 32:1}
 
 current_temp        = None
 current_cond        = None
@@ -37,15 +39,16 @@ warnings = {}
 
 class MeteoWarning():
 
-    def __init__(self, date, message):
+    def __init__(self, date, message, level):
         self.date = date
         self.message = message
+        self.level = level
 
     def __str__(self):
-        return f'({str(self.date)}) - {self.message}'
+        return f'({str(self.date)}) - {self.message} [{self.level}]'
 
     def __repr__(self):
-        return f'({str(self.date)}) - {self.message}'
+        return f'({str(self.date)}) - {self.message} [{self.level}]'
 
 class Updater(Thread):
 
@@ -67,18 +70,18 @@ class Updater(Thread):
                 
                 if current_code in codes.keys():
                     warnings.setdefault(current_date, []).append(MeteoWarning(current_date, \
-                        f'Upozorenje! {codes[current_code]}.'))
+                        f'Upozorenje! {codes[current_code]}.', code_levels[current_code]))
 
                 last_high = current_forecasts[0].high
                 last_low = current_forecasts[0].low
 
                 if last_high > temp_max:
                     warnings.setdefault(current_date, []).append(MeteoWarning(current_date, \
-                        f'Visoka temperatura [{last_high}]. Ponesite flasu vode.'))
+                        f'Visoka temperatura [{last_high}]. Ponesite flasu vode.', 2))
                     
                 if last_low < temp_min:
                     warnings.setdefault(current_date, []).append(MeteoWarning(current_date, \
-                        f'Visoka temperatura [{last_low}]. Pazite na led i ledenice.'))
+                        f'Niska temperatura [{last_low}]. Pazite na led i ledenice.', 2))
 
                 for i in range(1, len(current_forecasts)):
                     curr_high = current_forecasts[i].high
@@ -87,30 +90,30 @@ class Updater(Thread):
                     if abs(last_high - curr_high) > temp_diff:
                         if last_high < curr_high:
                             warnings.setdefault(curr_date, []).append(MeteoWarning(curr_date, \
-                                'Nagli porast temperature.'))
+                                'Nagli porast temperature.', 2))
                         else: 
                             warnings.setdefault(curr_date, []).append(MeteoWarning(curr_date, \
-                                'Nagli pad temperature.'))
+                                'Nagli pad temperature.', 2))
 
                     if (abs(last_low - curr_low)) > temp_diff:
                         if last_low > curr_low:
                             warnings.setdefault(curr_date, []).append(MeteoWarning(curr_date, \
-                                'Nagli pad temperature.'))
+                                'Nagli pad temperature.', 2))
                         else:
                             warnings.setdefault(curr_date, []).append(MeteoWarning(curr_date, \
-                                'Nagli porast temperature.'))
+                                'Nagli porast temperature.', 2))
                     
                     if curr_high > temp_max:
                         warnings.setdefault(curr_date, []).append(MeteoWarning(curr_date, \
-                            f'Visoka temperatura [{curr_high}]. Ponesite flasu vode sa sobom.'))
+                            f'Visoka temperatura [{curr_high}]. Ponesite flasu vode sa sobom.', 2))
 
                     if curr_low < temp_min:
                         warnings.setdefault(curr_date, []).append(MeteoWarning(curr_date, \
-                            f'Niska temperatura [{curr_low}]. Pazite na led i ledenice.'))
+                            f'Niska temperatura [{curr_low}]. Pazite na led i ledenice.', 2))
 
                     if current_forecasts[i].code in codes.keys():
                         warnings.setdefault(curr_date, []).append(MeteoWarning(curr_date, \
-                            f'Upozorenje! {codes[current_forecasts[i].code]}.'))
+                            f'Upozorenje! {codes[current_forecasts[i].code]}.', code_levels[current_forecasts[i].code]))
 
                 print(warnings)
 
