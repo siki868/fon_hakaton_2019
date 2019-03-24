@@ -1,8 +1,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <ul id="main_menu" class="dropdown-content">
-  <li><a href="#!">one</a></li>
-  <li><a href="#!">two</a></li>
-  <li><a href="#!">three</a></li>
+    <li><a href="#!">one</a></li>
+    <li><a href="#!">two</a></li>
+    <li><a href="#!">three</a></li>
 </ul>
 <div class="navbar-fixed">
     <nav>
@@ -10,22 +10,22 @@
             <a href="{% url 'main:index' %}" class="brand-logo">NKB</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="{% url 'main:mapa' %}">Koncentracija polena</a></li>
-                <li><a href="zagadjenost/">Zagadjenost vazduha</a></li>
+                <li><a href="{% url 'main:polen' %}">Koncentracija polena</a></li>
+                <li><a href="{% url 'main:zagadjenost' %}">Zagadjenost vazduha</a></li>
                 <li><a href="meteoalarm/">Meteo alarm</a></li>
                 <li><a href="/logout">Izloguj se</a></li>
             </ul>
         </div>
     </nav>
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="{% url 'main:mapa' %}">Koncentracija polena</a></li>
-        <li><a href="zagadjenost/">Zagadjenost vazduha</a></li>
+        <li><a href="{% url 'main:polen' %}">Koncentracija polena</a></li>
+        <li><a href="{% url 'main:zagadjenost' %}">Zagadjenost vazduha</a></li>
         <li><a href="meteoalarm/">Meteo alarm</a></li>
         <li><a href="/logout">Izloguj se</a></li>
     </ul>
 </div>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('.sidenav').sidenav();
     });
 </script>

@@ -31,7 +31,7 @@ def index(request):
 
     return render(request, 'index.html', context)
 
-def mapa(request):
+def polen(request):
     import requests
     import json
     from yahoo_weather import yahoo_weather as yw
@@ -58,7 +58,7 @@ def mapa(request):
     context = {
         "locations":locations
     }
-    return render(request, 'mapa.html', context)
+    return render(request, 'polen.html', context)
 
 def logout_request(request):
     logout(request)
@@ -99,3 +99,6 @@ def register(request):
                 messages.error(request, f'{msg}: {form.error_messages[msg]}')
     form = UserCreationForm
     return render(request, 'register.html', {'form': form})
+
+def zagadjenost(request):
+    return render(request, 'zagadjenost.html')
