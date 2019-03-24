@@ -98,7 +98,7 @@ if __name__ == "__main__":
     # Korak 3: Funkcija troška i optimizacija.
     Y_col = tf.reshape(Y, (-1, 1))
     loss = tf.reduce_mean(tf.square(hyp - Y_col))
-    opt_op = tf.train.GradientDescentOptimizer(learning_rate=0.001).minimize(loss)
+    opt_op = tf.train.AdamOptimizer(learning_rate=0.005).minimize(loss)
     print('Ovde3')
     # Korak 4: Trening.
     with tf.Session() as sess:
@@ -137,8 +137,8 @@ if __name__ == "__main__":
       ax.set_zlabel('Gramaza polena po metru kubnom')
 
       
-      p = ax.scatter(neko_x[:,0], neko_x[:,1], neko_y, c=neko_y*10)
-      cbar=plt.colorbar(p, ax=ax)
+      p = ax.scatter(neko_x[:,0], neko_x[:,1], neko_y, c=neko_y)
+      cbar=plt.colorbar(p)
       cbar.set_label('Polen')
       
       x1s, x2s = np.meshgrid(np.linspace(0.0, 35.0, 100), 
