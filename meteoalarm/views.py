@@ -11,7 +11,10 @@ class Warning():
 def meteo_view(request):
     if not meteo.running:
         meteo.meteo_init()
-
-    
-    
-    return HttpResponse('TEST')
+    upozorenja = meteo.warnings
+    upoz = []
+    for key in upozorenja:
+        for k in upozorenja[key]:
+            upoz.append([k.date, k.level, k.message[11:-1]])
+    print(upoz)
+    return render(request, 'meteo_main.html', {"upozorenja":upoz})
