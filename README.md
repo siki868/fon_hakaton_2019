@@ -1,3 +1,3 @@
-# eDnevnik
+# FON HAKATON TIM NKB
 
-## Elektronski dnevnik
+## FON HAKATON TIM NKB
